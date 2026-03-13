@@ -1,8 +1,23 @@
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-// 1. Setup Horizontal Scroll
-const panels = gsap.utils.toArray(".panel, .sentence-panel");
+// --- 1. Cinematic Fog Reveal (Page Load) ---
+window.addEventListener("load", () => {
+    const revealTl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
+    revealTl
+        .to(".fog-layer", { opacity: 1, duration: 1 })
+        .to(".hero-img-bg", { opacity: 0.3, duration: 2 }, "-=0.5")
+        .to(".hero-title", { opacity: 1, y: -20, duration: 1.5 }, "-=1")
+        .to(".hero-sub", { opacity: 0.8, duration: 1 }, "-=0.5")
+        // THE REVEAL: Fog moves outside
+        .to(".fog-1", { x: "-100%", opacity: 0, duration: 3 }, "reveal")
+        .to(".fog-2", { x: "100%", opacity: 0, duration: 3 }, "reveal")
+        .to(".fog-3", { y: "100%", opacity: 0, duration: 3 }, "reveal")
+        .set(".fog-container", { display: "none" });
+});
+
+// --- 2. Horizontal Scroll Setup ---
+const panels = gsap.utils.toArray(".panel, .sentence-panel");
 let scrollTween = gsap.to(panels, {
     xPercent: -100 * (panels.length - 1),
     ease: "none",
@@ -10,30 +25,13 @@ let scrollTween = gsap.to(panels, {
         trigger: ".horizontal",
         pin: true,
         scrub: 1,
-        // Ensure the end is calculated correctly based on width
         end: () => "+=" + (document.querySelector(".horizontal").scrollWidth - window.innerWidth)
     }
 });
 
-// 2. Hero Fade In
-gsap.from(".hero-title", { opacity: 0, y: 100, duration: 2, ease: "power4.out" });
-
-// 3. Savings Meter Animation
-gsap.to(".meter-fill", {
-    width: "100%",
-    scrollTrigger: {
-        trigger: ".saving",
-        containerAnimation: scrollTween,
-        start: "left center",
-        end: "right center",
-        scrub: true
-    }
-});
-
-// 4. Typewriter & Credit System
+// --- 3. Credit Drain & Typewriter Climax ---
 const creditCount = document.getElementById("credit-count");
 let totalCredits = 61;
-
 const script = [
     { id: "#word-1", text: "I", cost: 4 },
     { id: "#word-2", text: "have", cost: 6 },
@@ -42,7 +40,7 @@ const script = [
     { id: "#word-5", text: "you", cost: 8 }
 ];
 
-const climaxTimeline = gsap.timeline({
+const climaxTl = gsap.timeline({
     scrollTrigger: {
         trigger: ".sentence-panel",
         containerAnimation: scrollTween,
@@ -52,39 +50,20 @@ const climaxTimeline = gsap.timeline({
 });
 
 script.forEach((word) => {
-    climaxTimeline.to(word.id, {
-        duration: 0.8, // Slightly longer duration per word for impact
+    climaxTl.to(word.id, {
+        duration: 0.8,
         text: word.text,
         onStart: () => {
             totalCredits -= word.cost;
-            // Update UI
             creditCount.innerText = Math.max(0, totalCredits);
-            gsap.to(creditCount, { scale: 1.3, color: "#fff", duration: 0.1, yoyo: true, repeat: 1 });
+            gsap.to(creditCount, { scale: 1.4, color: "#fff", duration: 0.1, yoyo: true, repeat: 1 });
         }
-    }, "+=0.4"); // Delay between words increased for gravity
+    }, "+=0.4");
 });
 
-// Final Epilogue reveal
-climaxTimeline.to(".epilogue", { 
-    opacity: 1, 
-    y: -20, 
-    duration: 1.5 
-}, "+=0.5");
+climaxTl.to(".epilogue", { opacity: 1, y: -20, duration: 1.5 }, "+=0.5");
 
-// 5. Image Parallax Effect (Updated for better movement)
-gsap.utils.toArray(".image-slot img").forEach(img => {
-    gsap.to(img, {
-        x: 60, // Increased distance for stronger parallax effect
-        ease: "none",
-        scrollTrigger: {
-            trigger: img.parentElement,
-            containerAnimation: scrollTween,
-            scrub: true
-        }
-    });
-});
-
-// 6. Background "Debt" Shift
+// Background color bleed for climax
 gsap.to("body", {
     backgroundColor: "#1a0505",
     scrollTrigger: {
@@ -93,4 +72,17 @@ gsap.to("body", {
         start: "left center",
         scrub: true
     }
+});
+
+// Parallax for images
+gsap.utils.toArray(".image-slot img").forEach(img => {
+    gsap.to(img, {
+        x: 80,
+        ease: "none",
+        scrollTrigger: {
+            trigger: img.parentElement,
+            containerAnimation: scrollTween,
+            scrub: true
+        }
+    });
 });
