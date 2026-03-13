@@ -1,160 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>The Architect of Silence</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>The Architect of Silence</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
 </head>
-
 <body>
 
 <div id="cursor"></div>
 
-<div id="progress"></div>
+<div class="credit-display">
+    <span class="label">REMAINING WORD CREDITS:</span>
+    <span id="credit-count">61</span>
+</div>
 
 <section class="hero">
-
-<div class="hero-img">
-<!-- IMAGE SLOT -->
-</div>
-
-<h1 class="hero-title">
-THE ARCHITECT<br>OF SILENCE
-</h1>
-
-<p class="hero-sub">
-In the year 2041<br>
-words had a price
-</p>
-
+    <div class="hero-img"></div>
+    <h1 class="hero-title">THE ARCHITECT<br>OF SILENCE</h1>
+    <p class="hero-sub">In the year 2041<br>words had a price</p>
 </section>
 
-
 <section class="horizontal">
+    <div class="panel world">
+        <div class="image-slot"></div>
+        <div class="text-block">
+            <h2>The World</h2>
+            <p>The Global Silence Accord changed language forever. Words were taxed. Conversation was measured. Silence became the cheapest luxury.</p>
+        </div>
+    </div>
 
-<div class="panel world">
+    <div class="panel man">
+        <div class="text-block">
+            <h2>The Man</h2>
+            <p>His name was Eli Marsh. A clockmaker who rarely spoke. Not because he had nothing to say—but because what he wanted to say cost everything.</p>
+        </div>
+        <div class="image-slot"></div>
+    </div>
 
-<div class="image-slot"></div>
+    <div class="panel saving">
+        <h2 class="giant-text">TEN YEARS</h2>
+        <div class="savings-container">
+            <div class="savings-meter">
+                <div class="meter-fill"></div>
+            </div>
+            <div class="meter-number">61 WORD CREDITS ACCUMULATED</div>
+        </div>
+    </div>
 
-<div class="text-block">
-<h2>The World</h2>
+    <div class="panel registry">
+        <h2>Word Cost Registry</h2>
+        <ul class="word-list">
+            <li>I — <span class="cost">4</span></li>
+            <li>have — <span class="cost">6</span></li>
+            <li>always — <span class="cost">12</span></li>
+            <li class="gold">loved — <span class="cost">31</span></li>
+            <li>you — <span class="cost">8</span></li>
+        </ul>
+    </div>
 
-<p>
-The Global Silence Accord changed language forever.
-Words were taxed.
-Conversation was measured.
-Silence became the cheapest luxury.
-</p>
+    <div class="panel meeting">
+        <div class="image-slot large"></div>
+        <div class="meeting-text">
+            <p>He walked to her.</p>
+            <p>Ten years of silence.</p>
+            <p>Five words waiting.</p>
+        </div>
+    </div>
 
-</div>
-
-</div>
-
-
-<div class="panel man">
-
-<div class="text-block">
-
-<h2>The Man</h2>
-
-<p>
-His name was Eli Marsh.
-A clockmaker who rarely spoke.
-Not because he had nothing to say —
-but because what he wanted to say
-cost everything.
-</p>
-
-</div>
-
-<div class="image-slot"></div>
-
-</div>
-
-
-
-<div class="panel saving">
-
-<h2 class="giant-text">
-TEN YEARS
-</h2>
-
-<div class="savings-meter">
-
-<div class="meter-fill"></div>
-
-<div class="meter-number">61 WORD CREDITS</div>
-
-</div>
-
-</div>
-
-
-<div class="panel registry">
-
-<h2>Word Cost Registry</h2>
-
-<ul class="word-list">
-
-<li>I — 4 credits</li>
-<li>have — 6 credits</li>
-<li>always — 12 credits</li>
-<li class="gold">loved — 31 credits</li>
-<li>you — 8 credits</li>
-
-</ul>
-
-</div>
-
-
-<div class="panel meeting">
-
-<div class="image-slot large"></div>
-
-<div class="meeting-text">
-
-<p>He walked to her.</p>
-<p>Ten years of silence.</p>
-<p>Five words waiting.</p>
-
-</div>
-
-</div>
-
-
-
-<div class="panel sentence">
-
-<div class="sentence">
-
-<span>I</span>
-<span>have</span>
-<span>always</span>
-<span>loved</span>
-<span>you</span>
-
-</div>
-
-<div class="epilogue">
-
-<p>Cost: Everything.</p>
-<p>Worth: More.</p>
-
-</div>
-
-</div>
-
+    <div class="panel sentence-panel">
+        <div class="typewriter-container">
+            <span id="word-1" class="word"></span>
+            <span id="word-2" class="word"></span>
+            <span id="word-3" class="word"></span>
+            <span id="word-4" class="word"></span>
+            <span id="word-5" class="word"></span>
+        </div>
+        <div class="epilogue">
+            <p>Cost: Everything.</p>
+            <p>Worth: More.</p>
+        </div>
+    </div>
 </section>
 
 <script src="script.js"></script>
-
 </body>
 </html>
