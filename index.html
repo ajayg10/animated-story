@@ -11,11 +11,21 @@
 </head>
 <body>
 
+<div id="start-overlay">
+    <div class="start-content">
+        <p>[ CLICK TO ENTER 2041 ]</p>
+    </div>
+</div>
+
 <div class="fog-container">
     <div class="fog-layer fog-1"></div>
     <div class="fog-layer fog-2"></div>
     <div class="fog-layer fog-3"></div>
 </div>
+
+<audio id="tick-sound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+</audio>
 
 <div class="credit-display">
     <span class="label">REMAINING WORD CREDITS:</span>
@@ -23,7 +33,6 @@
 </div>
 
 <section class="hero">
-    <!-- <div class="hero-img-bg"></div> -->
     <div class="hero-img-bg" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000');"></div>
     <h1 class="hero-title">THE ARCHITECT<br>OF SILENCE</h1>
     <p class="hero-sub">In the year 2041<br>words had a price</p>
@@ -44,12 +53,13 @@
     <div class="panel man">
         <div class="text-block">
             <h2>The Man</h2>
-            <p>Eli Marsh. A clockmaker who spoke in gears and springs. He had spent ten years gathering a fortune in silence.</p>
+            <p>Eli Marsh. A clockmaker who spoke in gears. He spent ten years gathering a fortune in silence.</p>
         </div>
         <div class="image-slot portrait">
-            <img src="./img/image.png" alt="Eli Marsh">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000" alt="Eli">
         </div>
     </div>
+
 
     <div class="panel registry">
         <div class="text-block">
@@ -69,7 +79,6 @@
             <img src="./img/WhatsApp Image 2026-03-13 at 6.50.38 PM.jpeg" alt="The Meeting">
         </div>
         <div class="meeting-text">
-            <p>Ten years of debt.</p>
             <p>One final payment.</p>
         </div>
     </div>
@@ -83,8 +92,7 @@
             <span id="word-5" class="word"></span>
         </div>
         <div class="epilogue">
-            <p>Cost: Everything.</p>
-            <p>Worth: More.</p>
+            <p>Cost: Everything. Worth: More.</p>
         </div>
     </div>
 </section>
