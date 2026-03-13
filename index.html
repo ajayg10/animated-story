@@ -1,407 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Architect of Silence</title>
-<meta name="description" content="In a world where every word costs money, one man saves ten years to say five words.">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>The Architect of Silence</title>
 
 <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-<!-- ============================================
-     LOADING SCREEN
-============================================ -->
-<div id="loader">
-  <div id="loader-inner">
-    <div id="loader-line"></div>
-    <div id="loader-text">LOADING</div>
-    <div id="loader-year">2041</div>
-  </div>
-</div>
-
-<!-- Grain overlay -->
-<div id="grain"></div>
-
-<!-- Custom cursor -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<!-- Scroll progress line -->
-<div id="progress-line"></div>
-
-<!-- Chapter indicator -->
-<div id="chapter-indicator">
-  <span id="chapter-current">I</span>
-  <span id="chapter-sep">/</span>
-  <span id="chapter-total">VI</span>
-</div>
-
-<!-- Word Balance Meter (fixed, shown in Chapter 6) -->
-<div id="word-balance">
-  <div class="label">Word Balance</div>
-  <div class="balance-display" id="balance-num">61</div>
-  <div class="credits-word">credits</div>
-  <div id="balance-bar"><div id="balance-bar-fill"></div></div>
-</div>
-
-<!-- Mute Button -->
-<button id="mute-btn" aria-label="Toggle sound">◎ Sound</button>
-
-<!-- Scroll hint -->
-<div id="scroll-hint">
-  <span>Scroll to begin</span>
-  <div class="scroll-arrow"></div>
-</div>
-
-
-<!-- ============================================
-     HERO / INTRO
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #1 — Place here:
-     Prompt: "Empty foggy street at night, single 
-     distant lamppost, wet cobblestones reflecting 
-     light, noir, cinematic, 35mm grain, monochrome"
-     File: img/hero-bg.jpg | Size: 1920×1080px
-============================================ -->
-<section id="intro">
-  <!-- BG IMAGE SLOT -->
-  <div class="img-bg" id="intro-img-bg">
-    <!-- Replace this div's background-image in style.css or inline:
-         style="background-image: url('img/hero-bg.jpg')" -->
-    <div class="img-placeholder">
-      <span class="img-placeholder-label">IMAGE #1</span>
-      <span class="img-placeholder-desc">Dark foggy street · Single lamppost · Noir cinematic</span>
-    </div>
-  </div>
-  <div class="img-bg-overlay"></div>
-
-  <div id="intro-content">
-    <div id="intro-eyebrow">A Story About the Weight of Words</div>
-    <h1 id="intro-title">
-      <span class="title-line" id="tl1">THE ARCHITECT</span>
-      <span class="title-line" id="tl2">OF SILENCE</span>
-    </h1>
-    <div id="intro-divider"></div>
-    <p id="intro-sub">In the year 2041, words had a price.<br>He saved ten years to speak five.</p>
-    <div id="intro-meta">
-      <span>Reading time: 4 min</span>
-      <span class="dot">·</span>
-      <span>Scroll to read</span>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================
-     CHAPTER 1 — THE ECONOMY OF WORDS
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #2 — Place here:
-     Prompt: "Dystopian 2041 city aerial view, 
-     dark streets, surveillance screens on buildings
-     showing price tags over human mouths, 
-     noir, cinematic wide shot"
-     File: img/ch1-city.jpg | Size: 1920×1080px
-     Used as: dark overlay background in Chapter 1
-============================================ -->
-<section class="chapter" id="ch1" data-chapter="I">
-  <!-- BG IMAGE SLOT -->
-  <div class="img-bg" id="ch1-img-bg">
-    <div class="img-placeholder">
-      <span class="img-placeholder-label">IMAGE #2</span>
-      <span class="img-placeholder-desc">Dystopian cityscape 2041 · Price tags on words · Dark aerial</span>
-    </div>
-  </div>
-  <div class="img-bg-overlay dark"></div>
-
-  <div class="chapter-content">
-    <div class="chapter-label" id="ch1-label">Chapter I — The Economy of Words</div>
-    <div class="headline" id="ch1-headline">
-      <!-- Words injected by script.js via buildWordSpans() -->
-    </div>
-    <div id="ch1-statements">
-      <span class="statement-line" id="s1">Words were taxed.</span>
-      <span class="statement-line" id="s2">Conversation, metered.</span>
-      <span class="statement-line accent" id="s3">Silence, free.</span>
-    </div>
-
-    <blockquote id="ch1-quote">
-      <p>"The average person speaks 16,000 words per day.<br>
-      After the Accord — <em>four.</em>"</p>
-      <cite>— Global Silence Accord, Article I</cite>
-    </blockquote>
-  </div>
-</section>
-
-<div class="chapter-break"><span></span></div>
-
-
-<!-- ============================================
-     CHAPTER 2 — THE MAN
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #3 — Place here:
-     Prompt: "An elderly clockmaker sitting alone 
-     at his workbench at night, candlelight, 
-     surrounded by clocks and gears, not speaking,
-     hands resting still, dark atmospheric, 
-     35mm grain, chiaroscuro lighting"
-     File: img/ch2-clockmaker.jpg | Size: 900×1100px
-     Used as: portrait image alongside the SVG/text
-============================================ -->
-<section class="chapter" id="ch2" data-chapter="II">
-  <div class="silhouette-wrap" id="silhouette">
-    <div class="portrait-frame">
-      <!-- ACTUAL IMAGE SLOT — replace img tag src when ready -->
-      <div class="img-portrait-slot" id="ch2-portrait">
-        <div class="img-placeholder portrait">
-          <span class="img-placeholder-label">IMAGE #3</span>
-          <span class="img-placeholder-desc">Clockmaker at desk · Candlelight · Chiaroscuro</span>
-        </div>
-        <!-- When ready, replace above div with:
-             <img src="img/ch2-clockmaker.jpg" alt="Eli Marsh, clockmaker"> -->
-      </div>
-      <div class="portrait-caption">Eli Marsh, 2041</div>
-    </div>
-
-    <!-- SVG silhouette (keep as fallback / secondary element) -->
-    <svg class="silhouette-svg" width="80" height="200" viewBox="0 0 140 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="lightCone" cx="50%" cy="0%" r="80%">
-          <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <ellipse cx="70" cy="0" rx="60" ry="120" fill="url(#lightCone)"/>
-      <g fill="#1a1714" stroke="#3a3632" stroke-width="0.5">
-        <ellipse cx="70" cy="48" rx="18" ry="20"/>
-        <rect x="63" y="64" width="14" height="10" rx="3"/>
-        <path d="M35 78 Q50 72 70 74 Q90 72 105 78 L108 160 Q90 165 70 164 Q50 165 32 160 Z"/>
-        <path d="M35 80 Q22 100 20 140 Q24 144 28 140 Q32 108 42 90 Z"/>
-        <path d="M105 80 Q118 100 120 140 Q116 144 112 140 Q108 108 98 90 Z"/>
-        <path d="M50 160 Q46 200 44 240 Q50 244 56 240 Q60 200 70 178 Q80 200 84 240 Q90 244 96 240 Q94 200 90 160 Z"/>
-      </g>
-      <circle cx="118" cy="138" r="10" fill="none" stroke="#3a3632" stroke-width="0.8"/>
-      <line x1="118" y1="138" x2="118" y2="131" stroke="#7a7570" stroke-width="0.8" id="clock-hand-min"/>
-      <line x1="118" y1="138" x2="123" y2="138" stroke="#c8a96e" stroke-width="0.8" id="clock-hand-hr"/>
-    </svg>
-  </div>
-
-  <div class="text-col">
-    <div class="chapter-label" id="ch2-label">Chapter II — The Man</div>
-    <p class="name-line" id="ch2-name">His name was Eli Marsh.</p>
-    <p class="detail-line" id="ch2-detail1">A clockmaker by trade.</p>
-    <p class="detail-line" id="ch2-detail2">Wordless by choice.</p>
-    <p class="detail-line" id="ch2-detail3">Not because he had nothing to say —<br>but because what he needed to say<br><em>cost everything.</em></p>
-    <div class="silence-counter" id="ch2-counter">
-      Silent for <span id="silence-days">0</span> days, <span id="silence-hrs">0</span> hours.
-    </div>
-  </div>
-</section>
-
-<div class="chapter-break"><span></span></div>
-
-
-<!-- ============================================
-     CHAPTER 3 — THE ACCOUNT
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #4 — Place here:
-     Prompt: "Worn antique leather ledger book 
-     open on a wooden desk, handwritten numbers 
-     in ink, candlelight, close-up macro shot, 
-     dark background, golden rim light, 35mm"
-     File: img/ch3-ledger.jpg | Size: 1200×800px
-     Used as: subtle background behind bank UI
-============================================ -->
-<section class="chapter" id="ch3" data-chapter="III">
-  <!-- BG IMAGE SLOT -->
-  <div class="img-bg" id="ch3-img-bg">
-    <div class="img-placeholder">
-      <span class="img-placeholder-label">IMAGE #4</span>
-      <span class="img-placeholder-desc">Worn ledger book · Handwritten numbers · Candlelight close-up</span>
-    </div>
-  </div>
-  <div class="img-bg-overlay dark"></div>
-
-  <div class="chapter-content">
-    <div class="chapter-label" id="ch3-label">Chapter III — The Account</div>
-
-    <div class="word-bank-ui" id="bank-ui">
-      <div class="bank-balance-num" id="bank-num">0</div>
-      <div class="bank-balance-label">Word Credits</div>
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-fill" id="bank-bar"></div>
-      </div>
-      <div class="bank-years" id="bank-years">Year 0 of 10</div>
-    </div>
-
-    <p class="statement" id="ch3-stmt">
-      <strong>Every coin split in two.</strong><br>
-      Half for bread. Half for the Word Bank.<br>
-      <em>No holidays. No luxuries. No waste.</em>
-    </p>
-  </div>
-</section>
-
-<div class="chapter-break"><span></span></div>
-
-
-<!-- ============================================
-     CHAPTER 4 — THE COST
-============================================ -->
-<section class="chapter" id="ch4" data-chapter="IV">
-  <div class="chapter-content">
-    <div class="chapter-label" id="ch4-label">Chapter IV — The Cost</div>
-
-    <div class="cost-registry" id="cost-registry">
-      <div class="registry-header">
-        <span>Word Cost Registry</span>
-        <span>Sentence #1 — Account #77-ELI-MARSH</span>
-      </div>
-      <div class="cost-row" id="cost-I">
-        <span class="word-text">"I"</span>
-        <span class="word-price">4 credits</span>
-      </div>
-      <div class="cost-row" id="cost-have">
-        <span class="word-text">"have"</span>
-        <span class="word-price">6 credits</span>
-      </div>
-      <div class="cost-row" id="cost-always">
-        <span class="word-text">"always"</span>
-        <span class="word-price">12 credits</span>
-      </div>
-      <div class="cost-row highlight-row" id="cost-loved">
-        <span class="word-text">"loved"</span>
-        <div class="loved-price-wrap">
-          <span class="word-price gold">31 credits</span>
-          <span class="loved-note">— the most expensive word in the language</span>
-        </div>
-      </div>
-      <div class="cost-row" id="cost-you">
-        <span class="word-text">"you"</span>
-        <span class="word-price">8 credits</span>
-      </div>
-      <div class="cost-total" id="cost-total">
-        <span class="total-label">Total Sentence Cost</span>
-        <div class="total-right">
-          <span class="total-num">61 credits</span>
-          <span class="total-years">≈ 10 years of saving</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="chapter-break"><span></span></div>
-
-
-<!-- ============================================
-     CHAPTER 5 — THE DAY
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #5 — Place here:
-     Prompt: "Two elderly silhouettes standing 
-     apart on a misty street, one facing the other, 
-     neither speaking, street lamp between them, 
-     cinematic noir, long shot, emotional, 
-     black and white with warm golden fog"
-     File: img/ch5-meeting.jpg | Size: 1600×900px
-     Used as: full-width image below scene lines
-============================================ -->
-<section class="chapter" id="ch5" data-chapter="V">
-  <div class="chapter-content" style="width:100%;max-width:700px">
-    <div class="chapter-label" id="ch5-label">Chapter V — The Day</div>
-
-    <div class="scene-lines">
-      <span class="scene-line" id="sc1">He walked to the only person he'd been saving them for.</span>
-      <span class="scene-line" id="sc2">She was older now.</span>
-      <span class="scene-line" id="sc3">Her hands, the same.</span>
-      <span class="breath-pause"></span>
-      <span class="scene-line em" id="sc4">He opened his mouth.</span>
-    </div>
-
-    <!-- MEETING IMAGE SLOT -->
-    <div class="scene-image-wrap" id="ch5-img-wrap">
-      <div class="img-scene-slot">
-        <div class="img-placeholder scene">
-          <span class="img-placeholder-label">IMAGE #5</span>
-          <span class="img-placeholder-desc">Two silhouettes · Misty street · Noir emotional · Long shot</span>
-        </div>
-        <!-- When ready, replace above with:
-             <img src="img/ch5-meeting.jpg" alt="Two silhouettes meeting in fog"> -->
-      </div>
-    </div>
-
-    <div class="meter-wrap" id="meter-wrap">
-      <span class="meter-label">Voice Authorization</span>
-      <div class="meter-bar"><div class="meter-bar-fill" id="meter-fill"></div></div>
-      <span class="meter-click" id="meter-click">click.</span>
-    </div>
-  </div>
-</section>
-
-<div class="chapter-break"><span></span></div>
-
-
-<!-- ============================================
-     CHAPTER 6 — THE FINAL SENTENCE
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     IMAGE #6 — Place here:
-     Prompt: "A single old man standing alone 
-     under a lamp on an empty cobblestone street 
-     at night, mist, long shadow, seen from behind,
-     solitary, weight of silence, 35mm noir grain,
-     warm amber streetlight"
-     File: img/ch6-solitary.jpg | Size: 1920×1080px
-     Used as: full-bleed background in final chapter
-============================================ -->
-<section class="chapter" id="ch6" data-chapter="VI">
-  <!-- BG IMAGE SLOT -->
-  <div class="img-bg" id="ch6-img-bg">
-    <div class="img-placeholder">
-      <span class="img-placeholder-label">IMAGE #6</span>
-      <span class="img-placeholder-desc">Solitary figure · Amber street lamp · Cobblestones · Rear view</span>
-    </div>
-  </div>
-  <div class="img-bg-overlay heavy"></div>
-
-  <div class="chapter-content">
-    <div class="chapter-label" id="ch6-label">Chapter VI — The Sentence</div>
-
-    <div id="final-sentence-wrap">
-      <span class="final-word" id="fw-I"      data-cost="−4 cr">I</span>
-      <span class="final-word" id="fw-have"   data-cost="−6 cr">have</span>
-      <span class="final-word" id="fw-always" data-cost="−12 cr">always</span>
-      <span class="final-word" id="fw-loved"  data-cost="−31 cr">loved</span>
-      <span class="final-word" id="fw-you"    data-cost="−8 cr">you</span>
-    </div>
-
-    <div id="epilogue">
-      <div class="epilogue-divider"></div>
-      <span class="epilogue-line cost"  id="ep1">Cost: Everything.</span>
-      <span class="epilogue-line worth" id="ep2">Worth: More.</span>
-      <span class="epilogue-line sign"  id="ep3">— Eli Marsh, 2041</span>
-    </div>
-  </div>
-</section>
-
-<!-- Final black fade overlay -->
-<div id="final-black">
-  <div id="final-black-text">
-    <span>The End</span>
-    <span class="final-small">Some words are worth every second of silence.</span>
-  </div>
-</div>
-
-<!-- GSAP CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="cursor"></div>
+
+<div id="progress"></div>
+
+<section class="hero">
+
+<div class="hero-img">
+<!-- IMAGE SLOT -->
+</div>
+
+<h1 class="hero-title">
+THE ARCHITECT<br>OF SILENCE
+</h1>
+
+<p class="hero-sub">
+In the year 2041<br>
+words had a price
+</p>
+
+</section>
+
+
+<section class="horizontal">
+
+<div class="panel world">
+
+<div class="image-slot"></div>
+
+<div class="text-block">
+<h2>The World</h2>
+
+<p>
+The Global Silence Accord changed language forever.
+Words were taxed.
+Conversation was measured.
+Silence became the cheapest luxury.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="panel man">
+
+<div class="text-block">
+
+<h2>The Man</h2>
+
+<p>
+His name was Eli Marsh.
+A clockmaker who rarely spoke.
+Not because he had nothing to say —
+but because what he wanted to say
+cost everything.
+</p>
+
+</div>
+
+<div class="image-slot"></div>
+
+</div>
+
+
+
+<div class="panel saving">
+
+<h2 class="giant-text">
+TEN YEARS
+</h2>
+
+<div class="savings-meter">
+
+<div class="meter-fill"></div>
+
+<div class="meter-number">61 WORD CREDITS</div>
+
+</div>
+
+</div>
+
+
+<div class="panel registry">
+
+<h2>Word Cost Registry</h2>
+
+<ul class="word-list">
+
+<li>I — 4 credits</li>
+<li>have — 6 credits</li>
+<li>always — 12 credits</li>
+<li class="gold">loved — 31 credits</li>
+<li>you — 8 credits</li>
+
+</ul>
+
+</div>
+
+
+<div class="panel meeting">
+
+<div class="image-slot large"></div>
+
+<div class="meeting-text">
+
+<p>He walked to her.</p>
+<p>Ten years of silence.</p>
+<p>Five words waiting.</p>
+
+</div>
+
+</div>
+
+
+
+<div class="panel sentence">
+
+<div class="sentence">
+
+<span>I</span>
+<span>have</span>
+<span>always</span>
+<span>loved</span>
+<span>you</span>
+
+</div>
+
+<div class="epilogue">
+
+<p>Cost: Everything.</p>
+<p>Worth: More.</p>
+
+</div>
+
+</div>
+
+</section>
 
 <script src="script.js"></script>
+
 </body>
 </html>
