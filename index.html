@@ -1,103 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>The Architect of Silence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="The Architect of Silence — An immersive 3D storytelling experience set in 2041, where words have a price and love costs everything.">
+
+    <title>The Architect of Silence — A 3D Story</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
 </head>
+
 <body>
 
-<div id="start-overlay">
-    <div class="start-content">
-        <p>[ CLICK TO ENTER 2041 ]</p>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-text">LOADING SILENCE</div>
     </div>
-</div>
 
-<div class="fog-container">
-    <div class="fog-layer fog-1"></div>
-    <div class="fog-layer fog-2"></div>
-    <div class="fog-layer fog-3"></div>
-</div>
+    <!-- 3D Canvas -->
+    <canvas id="scene3d"></canvas>
 
-<audio id="tick-sound" preload="auto">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
-</audio>
+    <!-- Progress Bar -->
+    <div id="progress"></div>
 
-<div class="credit-display">
-    <span class="label">REMAINING WORD CREDITS:</span>
-    <span id="credit-count">61</span>
-</div>
+    <!-- Side Navigation -->
+    <nav class="side-nav" id="sideNav" aria-label="Story navigation">
+        <div class="dot active" data-section="0" data-label="Prologue"></div>
+        <div class="dot" data-section="1" data-label="The World"></div>
+        <div class="dot" data-section="2" data-label="The Man"></div>
+        <div class="dot" data-section="3" data-label="Ten Years"></div>
+        <div class="dot" data-section="4" data-label="Word Registry"></div>
+        <div class="dot" data-section="5" data-label="The Meeting"></div>
+        <div class="dot" data-section="6" data-label="Finale"></div>
+    </nav>
 
-<section class="hero">
-    <div class="hero-img-bg" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2000');"></div>
-    <h1 class="hero-title">THE ARCHITECT<br>OF SILENCE</h1>
-    <p class="hero-sub">In the year 2041<br>words had a price</p>
-</section>
 
-<section class="horizontal">
-    
-    <div class="panel world">
-        <div class="image-slot">
-            <img src="https://images.unsplash.com/photo-1514924013411-cbf25faa35bb?q=80&w=1000" alt="Dystopian City">
+    <!-- ═══════════════════════════════
+       SECTION 0 — HERO
+       ═══════════════════════════════ -->
+
+    <section class="story-section hero" id="section-hero">
+
+        <h1 class="hero-title">
+            THE ARCHITECT<br>OF SILENCE
+        </h1>
+
+        <p class="hero-sub">
+            In 2041, words had a price
+        </p>
+
+        <div class="hero-year">2041</div>
+
+        <div class="scroll-hint">
+            <span>Scroll to begin</span>
+            <div class="arrow"></div>
         </div>
-        <div class="text-block">
+
+    </section>
+
+
+    <!-- ═══════════════════════════════
+       SECTION 1 — THE WORLD
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-world" id="section-world">
+
+        <div class="story-card">
+
+            <img src="img/img-world.png" alt="A dystopian cityscape with holographic signs showing word prices"
+                class="scene-image" loading="lazy">
+
             <h2>The World</h2>
-            <p>The Global Silence Accord changed language forever. Words were taxed. Conversation was measured. Silence became the cheapest luxury.</p>
-        </div>
-    </div>
 
-    <div class="panel man">
-        <div class="text-block">
+            <p>
+                The Global Silence Accord changed language forever.
+                Words were taxed. Conversation was measured.
+                Every syllable carried a cost — and silence became
+                the only currency the poor could afford.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ═══════════════════════════════
+       SECTION 2 — THE MAN
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-man" id="section-man">
+
+        <div class="story-card">
+
+            <img src="img/img-man.png" alt="Eli Marsh, a solitary clockmaker in a dim workshop" class="scene-image"
+                loading="lazy">
+
             <h2>The Man</h2>
-            <p>Eli Marsh. A clockmaker who spoke in gears. He spent ten years gathering a fortune in silence.</p>
+
+            <p>
+                His name was Eli Marsh. A clockmaker who rarely spoke.
+                Not because he had nothing to say — but because
+                he was saving. Every unspoken word, every swallowed
+                thought, deposited into an account only he understood.
+            </p>
+
         </div>
-        <div class="image-slot portrait">
-            <img src="./img/image.png" alt="Eli">
-        </div>
-    </div>
+
+    </section>
 
 
-    <div class="panel registry">
-        <div class="text-block">
-            <h2>The Registry</h2>
+    <!-- ═══════════════════════════════
+       SECTION 3 — TEN YEARS
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-years" id="section-years">
+
+        <div class="years-title">TEN YEARS</div>
+
+        <p class="years-sub">of silence. of saving. of waiting.</p>
+
+        <div class="meter-track">
+            <div class="meter-fill" id="meterFill"></div>
+        </div>
+
+    </section>
+
+
+    <!-- ═══════════════════════════════
+       SECTION 4 — WORD REGISTRY
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-registry" id="section-registry">
+
+        <div class="story-card">
+
+            <h2>Word Registry</h2>
+
+            <p>Five words. That's all he needed. The cost of a lifetime of silence.</p>
+
             <ul class="word-list">
-                <li>I — <span class="cost">4</span></li>
-                <li>have — <span class="cost">6</span></li>
-                <li>always — <span class="cost">12</span></li>
-                <li class="gold">loved — <span class="cost">31</span></li>
-                <li>you — <span class="cost">8</span></li>
+                <li>
+                    <span class="word-text">"I"</span>
+                    <span class="word-cost">4 credits</span>
+                </li>
+                <li>
+                    <span class="word-text">"have"</span>
+                    <span class="word-cost">6 credits</span>
+                </li>
+                <li>
+                    <span class="word-text">"always"</span>
+                    <span class="word-cost">12 credits</span>
+                </li>
+                <li class="word-loved">
+                    <span class="word-text">"loved"</span>
+                    <span class="word-cost">31 credits</span>
+                </li>
+                <li>
+                    <span class="word-text">"you"</span>
+                    <span class="word-cost">8 credits</span>
+                </li>
             </ul>
-        </div>
-    </div>
 
-    <div class="panel meeting">
-        <div class="image-slot large">
-            <img src="./img/WhatsApp Image 2026-03-13 at 6.50.38 PM.jpeg" alt="The Meeting">
-        </div>
-        <div class="meeting-text">
-          <p>Ten years of debt.</p>
-            <p>One final payment.</p>
-        </div>
-    </div>
+            <div class="word-total">
+                <span>Total</span>
+                <span class="total-cost">61 credits</span>
+            </div>
 
-    <div class="panel sentence-panel">
-        <div class="typewriter-container">
-            <span id="word-1" class="word"></span>
-            <span id="word-2" class="word"></span>
-            <span id="word-3" class="word"></span>
-            <span id="word-4" class="word"></span>
-            <span id="word-5" class="word"></span>
         </div>
-        <div class="epilogue">
-            <p>Cost: Everything. Worth: More.</p>
-        </div>
-    </div>
-</section>
 
-<script src="script.js"></script>
+    </section>
+
+
+    <!-- ═══════════════════════════════
+       SECTION 5 — THE MEETING
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-meeting" id="section-meeting">
+
+        <div class="story-card">
+
+            <img src="img/img-meeting.png" alt="Two silhouettes facing each other with golden light between them"
+                class="scene-image" loading="lazy">
+
+            <h2>The Meeting</h2>
+
+            <p>
+                He found her at the bridge where they once stood in silence together.
+                She looked older. Tired. Beautiful. He opened his mouth
+                for the first time in a decade.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ═══════════════════════════════
+       SECTION 6 — FINALE
+       ═══════════════════════════════ -->
+
+    <section class="story-section section-finale" id="section-finale">
+
+        <div class="sentence" id="finalSentence">
+            <span class="word">I</span>
+            <span class="word">have</span>
+            <span class="word">always</span>
+            <span class="word">loved</span>
+            <span class="word">you</span>
+        </div>
+
+        <div class="epilogue" id="epilogue">
+            <p class="cost-line">Cost: Everything.</p>
+            <p class="worth-line">Worth: More.</p>
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
